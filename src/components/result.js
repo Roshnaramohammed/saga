@@ -1,19 +1,61 @@
-import React from 'react';
+import React, { useEffect, useState } from "react";
+import { apiGateway } from "../services/authorizationService";
 
 function Result() {
-    return (
-      <div>
+  const [results, setResults] = useState([
+    {
+      name: "Priya Electricals",
+      type: "CHAdeMo,CCS",
+      price: "16",
+      power: "25.0",
+      address: "cuddalore Pondiherry,SH49,Ariyankuppam,605007",
+      contact_number: "09486156156",
+    },
+    {
+      name: "Yogan Charge centre",
+      type: "Type2",
+      price: "20",
+      power: "60.0",
+      address:
+        "No.77, Gundu Salai, Near 100 Feet Road, Mariamman Nagar, Mudaliarpet, Puducherry, 605004",
+      contact_number: "09486156156",
+    },
+    {
+      name: "Test centre",
+      type: "Type2",
+      price: "20",
+      power: "60.0",
+      address:
+        "No.77, Gundu Salai, Near 100 Feet Road, Mariamman Nagar, Mudaliarpet, Puducherry, 605004",
+      contact_number: "09486156156",
+    },
+  ]);
+
+  useEffect(() => {
+    let params = new URL(document.location).searchParams;
+    let location = params.get("location");
+    // location api end point
+    const res = apiGateway.post(`/api/v1/location`, { location });
+    if (res.data) {
+      //settings backend data into the results state
+      setResults(res.data);
+    }
+  }, []);
+
+  return (
+    <div>
       <div class="about">
-         <div class="container">
-        <div>
+        <div class="container">
+          <div>
+            <body class="main-layout inner_posituong computer_page">
+              <div>
+                <div class="loader_bg">
+                  <div class="loader">
+                    <img src="./assets/images/loading.gif" alt="#" />
+                  </div>
+                </div>
 
-        <body class="main-layout inner_posituong computer_page">
-     <div>
-      <div class="loader_bg">
-         <div class="loader"><img src="./assets/images/loading.gif" alt="#" /></div>
-      </div>
-
-{/* <div class="card-deck">
+                {/* <div class="card-deck">
   <div class="card">
     <img class="card-img-top" src="..." alt="Card image cap"/>
     <div class="card-body">
@@ -46,42 +88,50 @@ function Result() {
   </div>
 </div> */}
 
-<br/>
-<div class="card">
-  <h3 class="card-header"><b>Priya Electricals</b></h3>
-  <div class="card-body ">
-    <h5 class="card-title"><b>CHARGER TYPE:</b>CHAdeMo,CCS</h5>
-    <h5 class="text-left"><b>PRICE/HOUR :</b> ₹16</h5>
-    <h5 class="card-text"><b>POWER : </b>25.0kW</h5>
-    <h5 class="card-text"><b>ADDRESS: </b>cuddalore Pondiherry,SH49,Ariyankuppam,605007</h5>
-    <h5 class="card-text"><b>CONTACT NUM : </b>06385232604</h5>
-    <div class="text-right"><a href="#" class="btn btn-primary"> Book Slot</a></div>
-  </div>
-</div><br/><div class="card">
-  <h3 class="card-header"><b>Yogan Charge centre</b></h3>
-  <div class="card-body ">
-    <h5 class="card-title"><b>CHARGER TYPE:</b> Type2</h5>
-    <h5 class="text-left"><b>PRICE/HOUR :</b> ₹20</h5>
-    <h5 class="card-text"> <b>POWER : </b> 60.0kW</h5>
-    <h5 class="card-text"><b>ADDRESS: </b> No.77, Gundu Salai, Near 100 Feet Road, Mariamman Nagar, Mudaliarpet, Puducherry, 605004</h5>
-    <h5 class="card-text"><b>CONTACT NUM : </b> 09486156156</h5>
-    <div class="text-right"><a href="#" class="btn btn-primary"> Book Slot</a></div>
-  </div>
-</div><br/><div class="card">
-  <h5 class="card-header">Charging station 1</h5>
-  <div class="card-body ">
-    <h5 class="card-title">Conection Type</h5>
-    <h3 class="text-right"> Price </h3>
-    <p class="card-text">Location..</p>
-    <p class="card-text">Contact number</p>
-    <div class="text-right"><a href="#" class="btn btn-primary"> Book Slot</a></div>
-  </div>
-</div><br/>
-
-</div>
-</body></div></div>
-</div>     
-</div>
-     );
-   }
- export default Result;
+                {results.map((item) => (
+                  <>
+                    <br />
+                    <div class="card">
+                      <h3 class="card-header">
+                        <b>{item.name}</b>
+                      </h3>
+                      <div class="card-body ">
+                        <h5 class="card-title">
+                          <b>CHARGER TYPE:</b>
+                          {item.type}
+                        </h5>
+                        <h5 class="text-left">
+                          <b>PRICE/HOUR :</b> ₹{item.price}
+                        </h5>
+                        <h5 class="card-text">
+                          <b>POWER : </b>
+                          {item.power}kW
+                        </h5>
+                        <h5 class="card-text">
+                          <b>ADDRESS: </b>
+                          {item.address}
+                        </h5>
+                        <h5 class="card-text">
+                          <b>CONTACT NUM : </b>
+                          {item.contact_number}
+                        </h5>
+                        <div class="text-right">
+                          <a href="#" class="btn btn-primary">
+                            {" "}
+                            Book Slot
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                    <br />
+                  </>
+                ))}
+              </div>
+            </body>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+export default Result;
