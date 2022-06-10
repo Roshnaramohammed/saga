@@ -1,4 +1,3 @@
-import * as React from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -12,6 +11,8 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import React, { useState } from "react";
+import { apiGateway } from "../services/authorizationService";
 
 function Copyrightt(props) {
   return (
@@ -29,13 +30,26 @@ function Copyrightt(props) {
 const theme = createTheme();
 
 export default function SignUp() {
+
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+    password2: "",
+    first_name: "",
+    last_name: "",
+  })
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+    console.log(formData);
+    const resData = apiGateway.post(`/account/register/`, formData);
+    console.log(resData.data);
+    
   };
 
   return (
@@ -72,8 +86,9 @@ export default function SignUp() {
                   name="firstName"
                   required
                   fullWidth
-                  id="firstName"
+                  id="first_name"
                   label="First Name"
+                  onChange={handleChange}
                   autoFocus
                 />
               </Grid>
@@ -85,7 +100,8 @@ export default function SignUp() {
                   fullWidth
                   id="lastName"
                   label="Last Name"
-                  name="lastName"
+                  name="last_name"
+                  onChange={handleChange}
                   autoComplete="family-name"
                 />
               </Grid>
@@ -98,6 +114,7 @@ export default function SignUp() {
                   id="email"
                   label="Email Address"
                   name="email"
+                  onChange={handleChange}
                   autoComplete="email"
                 />
               </Grid>
@@ -111,6 +128,21 @@ export default function SignUp() {
                   label="Password"
                   type="password"
                   id="password"
+                  onChange={handleChange}
+                  autoComplete="new-password"
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                multiline={true}
+                rows={1}
+                  required
+                  fullWidth
+                  name="password2"
+                  label="Confirm Password"
+                  type="password"
+                  id="password2"
+                  onChange={handleChange}
                   autoComplete="new-password"
                 />
               </Grid>

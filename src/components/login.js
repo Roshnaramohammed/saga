@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState } from "react";
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -12,7 +12,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { axios } from 'axios';
+import { apiGateway } from "../services/authorizationService";
 
 function Copyright(props) {
   return (
@@ -30,26 +30,22 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function SignIn() {
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+  
   const handleSubmit = (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    axios.post('http://localhost:8000/account/login', {
-      email: data.get('email'),
-      password: data.get('password'),
-    }, {
-      headers:{
-        'content-type': 'multipart/form-data'
-      }}).then(response => {
-
-        console.log(response)
-      }).catch(error => {
-        console.log(error)
-      })
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
-  };
+    console.log(formData);
+    const resData = apiGateway.post(`/account/login/`, formData);
+    console.log(resData);
+  }
 
   return (
       <div>
@@ -89,6 +85,7 @@ export default function SignIn() {
               id="email"
               label="Email Address"
               name="email"
+              onChange={handleChange}
               autoComplete="email"
               autoFocus
             />
@@ -98,6 +95,7 @@ export default function SignIn() {
               margin="normal"
               required
               fullWidth
+              onChange={handleChange}
               name="password"
               label="Password"
               type="password"
@@ -136,7 +134,7 @@ export default function SignIn() {
     </div>
     </div>
   );
-}
+};
 
 export {SignIn,Copyright}
 
