@@ -10,25 +10,31 @@ import ElectricRickshawIcon from '@mui/icons-material/ElectricRickshaw';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import Stack from '@mui/material/Stack';
+import SlotPicker from 'slotpicker';
+
 
 export default function Book() {
+ 
   return (
     <div>
-      <head>
-        <style>
+   
+          <div class="loader_bg"><br/><br/><br></br>
+          <div class="loader"><img src="./assets/images/loading.gif" alt="#" /></div>
+          </div>
+          <div class="about">
+          <div class="container"> 
+          <br/><br/><br></br>
 
-        </style>
-      </head>
-
-    <div class="loader_bg"><br/><br/><br></br>
-    <div class="loader"><img src="./assets/images/loading.gif" alt="#" /></div>
-    </div>
-    <div class="about">
-    <div class="container"> 
-    <h1 class="display-4"> Enter your vehicle details</h1>
-    <FormControl component="fieldset">
-      <FormLabel component="legend">Select your vehicle </FormLabel>
-      <FormGroup aria-label="position" row>
+          <div class="card text-left">
+        <div class="card-header">
+        <h1 class="display-4 titlepage text-center"> Enter your vehicle details</h1>
+        </div>
+        <div class="card-body">
+      
+          {/* <h5 class="card-title">Special title treatment</h5> */}
+          <FormControl component="fieldset">
+      <FormLabel component="legend">Select your vehicle :</FormLabel> 
+      &nbsp; <FormGroup aria-label="position" row>
         
         <FormControlLabel
           value="start"
@@ -53,23 +59,17 @@ export default function Book() {
 
       </FormGroup>
     </FormControl>
-
-
+    <FormLabel component="legend">Select charge type : </FormLabel>
     <Autocomplete
       disablePortal
       id="combo-box-demo"
       options={top100Films}
       sx={{ width: 300 }}
-      renderInput={(params) => <TextField {...params} label="Chrge type" />}
+      renderInput={(params) => <TextField {...params} label="Choose one" />}
     /> <br/>
-
-
-        <div class="col-md-4">
-                <label for="inputZip" class="form-label">
-                  Choose your Date of booking
-                </label>
-        </div>        
-    <Stack component="form" noValidate spacing={3}>
+       <FormLabel component="legend">Select Date of charging : </FormLabel>
+ 
+        <Stack component="form" noValidate spacing={3}>
       <TextField
         id="date"
         label="Date"
@@ -80,33 +80,35 @@ export default function Book() {
           shrink: true,
         }}
       />
-      <TextField
-        id="time"
-        label="Time"
-        type="time"
-        defaultValue="07:30"
-        InputLabelProps={{
-          shrink: true,
-        }}
-        inputProps={{
-          step: 300, // 5 min
-        }}
-        sx={{ width: 150 }}
-      />
-
-    </Stack>
-
-
-    <div class="col-12 text-right">
-                <button
-                  type="submit"
-                  class="btn btn-primary"
-                >
-                  BOOK NOW
-                </button>
-              </div>
-
-    
+      
+    </Stack>  
+    <FormLabel component="legend">Select time of charging : </FormLabel>
+ 
+      <SlotPicker
+        // Required, interval between two slots in minutes, 30 = 30 min
+        interval={60}
+        // Required, when user selects a time slot, you will get the 'from' selected value
+        onSelectTime={(from) => console.log(from)}
+        // Optional, array of unavailable time slots
+        unAvailableSlots={['10:00', '15:00']}
+        // Optional, 8AM the start of the slots
+        from={'06:00'}
+        // Optional, 09:00PM the end of the slots
+        to={'23:00'}
+        // Optional, 01:00 PM, will be selected by default
+        defaultSelectedTime={'13:00'}
+        // Optional, selected slot color
+        selectedSlotColor='#F09999'
+        // Optional, language of the displayed text, default is english (en)
+        lang='en'
+      />;
+          <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+          <a href="#" class="btn btn-primary">Go somewhere</a>
+        </div>
+        <div class="card-footer text-muted">
+          2 days ago
+        </div>
+      </div>    
     </div></div></div>
     
   );
