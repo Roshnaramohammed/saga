@@ -1,15 +1,17 @@
-import React from 'react';
+import React from "react";
+import { Link } from "react-router-dom";
 
 function Home() {
-    return (
-      <div>
-          <body class="main-layout">
-      {/* <div class="loader_bg">
+  const token = localStorage.getItem("token");
+  return (
+    <div>
+      <body class="main-layout">
+        {/* <div class="loader_bg">
          <div class="loader"><img src="assets/images/loading.gif" alt="#" /></div>
       </div> */}
-      
-      <section class="banner_main">
-         <div id="banner1" class="carousel slide" data-ride="carousel">
+
+        <section class="banner_main">
+          <div id="banner1" class="carousel slide" data-ride="carousel">
             {/* <ol class="carousel-indicators">
                <li data-target="#banner1" data-slide-to="0" class="active"></li>
                <li data-target="#banner1" data-slide-to="1"></li>
@@ -18,156 +20,223 @@ function Home() {
                <li data-target="#banner1" data-slide-to="4"></li>
             </ol> */}
             <div class="carousel-inner">
-               <div class="carousel-item active">
-                  <div class="container">
-                     <div class="carousel-caption">
-                        <div class="row">
-                           <div class="col-md-6">
-                              <div class="text-bg">
-                                 <span>Electric Vehicle</span>
-                                 <h1>Share Charge</h1>
-                                 <p>The India's bookable home and destination EV charging network, Charge your electric vehicle a anywhere and at anytime </p>
-                                 <a href="search">Find Station </a>
-                                 <a href="addstation2">Add Station </a>
-                                 </div>
-                           </div>
-                           <div class="col-md-6">
-                              <div class="text_img">
-                                 <figure><img src="assets/images/pctt.png" alt="#"/></figure>
-                              </div>
-                           </div>
+              <div class="carousel-item active">
+                <div class="container">
+                  <div class="carousel-caption">
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="text-bg">
+                          <span>Electric Vehicle</span>
+                          <h1>Share Charge</h1>
+                          <p>
+                            The India's bookable home and destination EV
+                            charging network, Charge your electric vehicle a
+                            anywhere and at anytime{" "}
+                          </p>
+                          <Link to="/search">Find Station </Link>
+                          <Link to={token ? "/addstation2" : "/login"}>
+                            Add Station{" "}
+                          </Link>
                         </div>
-                     </div>
-                  </div>
-               </div>
-               <div class="carousel-item">
-                  <div class="container">
-                     <div class="carousel-caption">
-                        <div class="row">
-                           <div class="col-md-6">
-                           <div class="text-bg">
-                                 <span>Electric Vehicle</span>
-                                 <h1>Share Charge</h1>
-                                 <p>The Indias bookable home and destination EV charging network, Charge your electric vehicle a anywhere and at anytime </p>
-                                 <a href="search">Find Station </a>
-                                 <a href="addstation2">Add Station </a>
-                              </div>
-                           </div>
-                           <div class="col-md-6">
-                              <div class="text_img">
-                                 <figure><img src="assets/images/pctt.png" alt="#"/></figure>
-                              </div>
-                           </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="text_img">
+                          <figure>
+                            <img src="assets/images/pctt.png" alt="#" />
+                          </figure>
                         </div>
-                     </div>
+                      </div>
+                    </div>
                   </div>
-               </div>
-               <div class="carousel-item">
-                  <div class="container">
-                     <div class="carousel-caption">
-                        <div class="row">
-                           <div class="col-md-6">
-                           <div class="text-bg">
-                                 <span>Electric Vehicle</span>
-                                 <h1>Share Charge</h1>
-                                 <p>The Indias bookable home and destination EV charging network, Charge your electric vehicle a anywhere and at anytime </p>
-                                 <a href="search">Find Station </a>
-                                 <a href="addstation2">Add Station </a>
-                                 </div>
-                           </div>
-                           <div class="col-md-6">
-                              <div class="text_img">
-                                 <figure><img src="assets/images/pctt.png" alt="#"/></figure>
-                              </div>
-                           </div>
+                </div>
+              </div>
+              <div class="carousel-item">
+                <div class="container">
+                  <div class="carousel-caption">
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="text-bg">
+                          <span>Electric Vehicle</span>
+                          <h1>Share Charge</h1>
+                          <p>
+                            The Indias bookable home and destination EV charging
+                            network, Charge your electric vehicle a anywhere and
+                            at anytime{" "}
+                          </p>
+                          <Link to="/search">Find Station </Link>
+                          <Link to={token ? "/addstation2" : "/login"}>
+                            Add Station{" "}
+                          </Link>
                         </div>
-                     </div>
-                  </div>
-               </div>
-               <div class="carousel-item">
-                  <div class="container">
-                     <div class="carousel-caption">
-                        <div class="row">
-                           <div class="col-md-6">
-                           <div class="text-bg">
-                                 <span>Electric Vehicle</span>
-                                 <h1>Share Charge</h1>
-                                 <p>The Indias bookable home and destination EV charging network, Charge your electric vehicle a anywhere and at anytime </p>
-                                 <a href="search">Find Station </a>
-                                 <a href="addstation2">Add Station </a>
-                              </div>
-                           </div>
-                           <div class="col-md-6">
-                              <div class="text_img">
-                                 <figure><img src="assets/images/pctt.png" alt="#"/></figure>
-                              </div>
-                           </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="text_img">
+                          <figure>
+                            <img src="assets/images/pctt.png" alt="#" />
+                          </figure>
                         </div>
-                     </div>
+                      </div>
+                    </div>
                   </div>
-               </div>
-               <div class="carousel-item">
-                  <div class="container">
-                     <div class="carousel-caption">
-                        <div class="row">
-                           <div class="col-md-6">
-                           <div class="text-bg">
-                                 <span>Electric Vehicle</span>
-                                 <h1>Share Charge</h1>
-                                 <p>The Indias bookable home and destination EV charging network, Charge your electric vehicle a anywhere and at anytime </p>
-                                 <a href="search">Find Station </a> <a href="contact.html">Add Station </a>
-                              </div>
-                           </div>
-                           <div class="col-md-6">
-                              <div class="text_img">
-                                 <figure><img src="assets/images/pctt.png" alt="#"/></figure>
-                              </div>
-                           </div>
+                </div>
+              </div>
+              <div class="carousel-item">
+                <div class="container">
+                  <div class="carousel-caption">
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="text-bg">
+                          <span>Electric Vehicle</span>
+                          <h1>Share Charge</h1>
+                          <p>
+                            The Indias bookable home and destination EV charging
+                            network, Charge your electric vehicle a anywhere and
+                            at anytime{" "}
+                          </p>
+                          <Link to="/search">Find Station </Link>
+                          <Link to={token ? "/addstation2" : "/login"}>
+                            Add Station{" "}
+                          </Link>
                         </div>
-                     </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="text_img">
+                          <figure>
+                            <img src="assets/images/pctt.png" alt="#" />
+                          </figure>
+                        </div>
+                      </div>
+                    </div>
                   </div>
-               </div>
+                </div>
+              </div>
+              <div class="carousel-item">
+                <div class="container">
+                  <div class="carousel-caption">
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="text-bg">
+                          <span>Electric Vehicle</span>
+                          <h1>Share Charge</h1>
+                          <p>
+                            The Indias bookable home and destination EV charging
+                            network, Charge your electric vehicle a anywhere and
+                            at anytime{" "}
+                          </p>
+                          <Link to="/search">Find Station </Link>
+                          <Link to={token ? "/addstation2" : "/login"}>
+                            Add Station{" "}
+                          </Link>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="text_img">
+                          <figure>
+                            <img src="assets/images/pctt.png" alt="#" />
+                          </figure>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="carousel-item">
+                <div class="container">
+                  <div class="carousel-caption">
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="text-bg">
+                          <span>Electric Vehicle</span>
+                          <h1>Share Charge</h1>
+                          <p>
+                            The Indias bookable home and destination EV charging
+                            network, Charge your electric vehicle a anywhere and
+                            at anytime{" "}
+                          </p>
+                          <Link to="/search">Find Station </Link>
+                          <Link to={token ? "/addstation2" : "/login"}>
+                            Add Station{" "}
+                          </Link>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="text_img">
+                          <figure>
+                            <img src="assets/images/pctt.png" alt="#" />
+                          </figure>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-            <a class="carousel-control-prev" href="#banner1" role="button" data-slide="prev">
-            <i class="fa fa-chevron-left" aria-hidden="true"></i>
+            <a
+              class="carousel-control-prev"
+              href="#banner1"
+              role="button"
+              data-slide="prev"
+            >
+              <i class="fa fa-chevron-left" aria-hidden="true"></i>
             </a>
-            <a class="carousel-control-next" href="#banner1" role="button" data-slide="next">
-            <i class="fa fa-chevron-right" aria-hidden="true"></i>
+            <a
+              class="carousel-control-next"
+              href="#banner1"
+              role="button"
+              data-slide="next"
+            >
+              <i class="fa fa-chevron-right" aria-hidden="true"></i>
             </a>
-         </div>
-      </section>
-      
-      
-      <div class="three_box">
-         <div class="container">
+          </div>
+        </section>
+
+        <div class="three_box">
+          <div class="container">
             <div class="row">
-               <div class="col-md-4">
-                  <div class="box_text">
-                     <i><img src="assets/images/opt.png" alt="#"/></i>
-                     <h3>Optimization</h3>
-                     <p> Optimize Electricity Usage within Sanctioned Load, and provides a better result to EV users and time</p>
-                  </div>
-               </div>
-               <div class="col-md-4">
-                  <div class="box_text">
-                     <i><img src="assets/images/cmt.png" alt="#"/></i>
-                     <h3>Network community</h3>
-                     <p>community of chargepoint owners help EV drivers by wiping out charging deserts and providing a wide network</p>
-                  </div>
-               </div>
-               <div class="col-md-4">
-                  <div class="box_text">
-                     <i><img src="assets/images/efc.png" alt="#"/></i><br/>
-                     <h3>Efficient </h3> 
-                     <p>Efficiency of the vehicle will be increased, because it will be able to recharge and use properly </p>
-                  </div>
-               </div>
-            </div><br/>
-         </div>
-      </div>
-      
-      
-      {/* <div  class="products">
+              <div class="col-md-4">
+                <div class="box_text">
+                  <i>
+                    <img src="assets/images/opt.png" alt="#" />
+                  </i>
+                  <h3>Optimization</h3>
+                  <p>
+                    {" "}
+                    Optimize Electricity Usage within Sanctioned Load, and
+                    provides a better result to EV users and time
+                  </p>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="box_text">
+                  <i>
+                    <img src="assets/images/cmt.png" alt="#" />
+                  </i>
+                  <h3>Network community</h3>
+                  <p>
+                    community of chargepoint owners help EV drivers by wiping
+                    out charging deserts and providing a wide network
+                  </p>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="box_text">
+                  <i>
+                    <img src="assets/images/efc.png" alt="#" />
+                  </i>
+                  <br />
+                  <h3>Efficient </h3>
+                  <p>
+                    Efficiency of the vehicle will be increased, because it will
+                    be able to recharge and use properly{" "}
+                  </p>
+                </div>
+              </div>
+            </div>
+            <br />
+          </div>
+        </div>
+
+        {/* <div  class="products">
          <div class="container">
             <div class="row">
                <div class="col-md-12">
@@ -243,7 +312,7 @@ function Home() {
             </div>
          </div>
       </div> */}
-{/*       
+        {/*       
       <div class="laptop">
          <div class="container">
             <div class="row">
@@ -262,7 +331,7 @@ function Home() {
             </div>
          </div>
       </div> */}
-{/*       
+        {/*       
       <div class="customer">
          <div class="container">
             <div class="row">
@@ -341,7 +410,7 @@ function Home() {
          </div>
       </div> */}
 
-      {/* <div class="contact">
+        {/* <div class="contact">
          <div class="container">
             <div class="row">
                <div class="col-md-12">
@@ -375,9 +444,8 @@ function Home() {
             </div>
          </div>
       </div>    */}
-     </body>
-     </div>
-     
-    );
-  }
+      </body>
+    </div>
+  );
+}
 export default Home;

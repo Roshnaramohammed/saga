@@ -1,28 +1,34 @@
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
-import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import Link from '@mui/material/Link';
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import Avatar from "@mui/material/Avatar";
+import Button from "@mui/material/Button";
+import CssBaseline from "@mui/material/CssBaseline";
+import TextField from "@mui/material/TextField";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Checkbox from "@mui/material/Checkbox";
+import Link from "@mui/material/Link";
+import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import Typography from "@mui/material/Typography";
+import Container from "@mui/material/Container";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 import React, { useState } from "react";
 import { apiGateway } from "../services/authorizationService";
+import { useNavigate } from "react-router-dom";
 
 function Copyrightt(props) {
   return (
-    <Typography variant="body2" color="text.secondary" align="center" {...props}>
-      {'Copyright © '}
+    <Typography
+      variant="body2"
+      color="text.secondary"
+      align="center"
+      {...props}
+    >
+      {"Copyright © "}
       <Link color="inherit" href="https://mui.com/">
         Your Website
-      </Link>{' '}
+      </Link>{" "}
       {new Date().getFullYear()}
-      {'.'}
+      {"."}
     </Typography>
   );
 }
@@ -30,6 +36,7 @@ function Copyrightt(props) {
 const theme = createTheme();
 
 export default function SignUp() {
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     email: "",
@@ -37,152 +44,156 @@ export default function SignUp() {
     password2: "",
     first_name: "",
     last_name: "",
-  })
+  });
 
   const handleChange = (e) => {
-    
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-
   const handleSubmit = (event) => {
-    event.preventDefault();
-    console.log(formData);
-    const resData = apiGateway.post(`/account/register/`, formData);
-    console.log(resData);
-    
+    try {
+      event.preventDefault();
+      const resData = apiGateway.post(`/account/register/`, formData);
+      if (resData.status === 200 || resData.status === 201) {
+        navigate("/login");
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
-  
 
   return (
     <div>
-    <div class="loader_bg">
+      {/* <div class="loader_bg">
     <div class="loader"><img src="./assets/images/loading.gif" alt="#" /></div>
-    </div>
-    <div class="about">
-    <div class="container"> 
-    <ThemeProvider theme={theme}>
-      <Container component="main" maxWidth="xs">
-        <CssBaseline />
-        <Box
-          sx={{
-            marginTop: 8,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-          }}
-        >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-            <LockOutlinedIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            Sign up
-          </Typography>
-          <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
-            <Grid container spacing={2}>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                multiline={true}
-                rows={1}
-                  autoComplete="given-name"
-                  name="first_name"
-                  required
-                  fullWidth
-                  id="first_name"
-                  label="First Name"
-                  onChange={handleChange}
-                  autoFocus
-                  value={formData.first_name}
-                />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                multiline={true}
-                rows={1}
-                  required
-                  fullWidth
-                  id="lastName"
-                  label="Last Name"
-                  name="last_name"
-                  onChange={handleChange}
-                  autoComplete="family-name"
-                  value={formData.last_name}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                multiline={true}
-                rows={1}
-                  required
-                  fullWidth
-                  id="email"
-                  label="Email Address"
-                  name="email"
-                  onChange={handleChange}
-                  autoComplete="email"
-                  value={formData.email}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                multiline={true}
-                rows={1}
-                  required
-                  fullWidth
-                  name="password"
-                  label="Password"
-                  type="password"
-                  id="password"
-                  onChange={handleChange}
-                  autoComplete="new-password"
-                  value={formData.password}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                multiline={true}
-                rows={1}
-                  required
-                  fullWidth
-                  name="password2"
-                  label="Confirm Password"
-                  type="password"
-                  id="password2"
-                  onChange={handleChange}
-                  autoComplete="new-password"
-                  value={formData.password2}
-                />
-              </Grid>
-              
-            </Grid>
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-            >
-              Sign Up
-            </Button>
-            <Grid container justifyContent="flex-end">
-              <Grid item>
-                <Link href="/login" variant="body2">
-                  Already have an account? Sign in
-                </Link>
-              </Grid>
-            </Grid>
-          </Box>
-        </Box>
-      </Container>
-    </ThemeProvider>
-    </div>
-    </div>
+    </div> */}
+      <div class="about">
+        <div class="container">
+          <ThemeProvider theme={theme}>
+            <Container component="main" maxWidth="xs">
+              <CssBaseline />
+              <Box
+                sx={{
+                  marginTop: 8,
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                }}
+              >
+                <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+                  <LockOutlinedIcon />
+                </Avatar>
+                <Typography component="h1" variant="h5">
+                  Sign up
+                </Typography>
+                <Box
+                  component="form"
+                  noValidate
+                  onSubmit={handleSubmit}
+                  sx={{ mt: 3 }}
+                >
+                  <Grid container spacing={2}>
+                    <Grid item xs={12} sm={6}>
+                      <TextField
+                        multiline={true}
+                        rows={1}
+                        autoComplete="given-name"
+                        name="first_name"
+                        required
+                        fullWidth
+                        id="first_name"
+                        label="First Name"
+                        onChange={handleChange}
+                        autoFocus
+                        value={formData.first_name}
+                      />
+                    </Grid>
+                    <Grid item xs={12} sm={6}>
+                      <TextField
+                        multiline={true}
+                        rows={1}
+                        required
+                        fullWidth
+                        id="lastName"
+                        label="Last Name"
+                        name="last_name"
+                        onChange={handleChange}
+                        autoComplete="family-name"
+                        value={formData.last_name}
+                      />
+                    </Grid>
+                    <Grid item xs={12}>
+                      <TextField
+                        multiline={true}
+                        rows={1}
+                        required
+                        fullWidth
+                        id="email"
+                        label="Email Address"
+                        name="email"
+                        onChange={handleChange}
+                        autoComplete="email"
+                        value={formData.email}
+                      />
+                    </Grid>
+                    <Grid item xs={12}>
+                      <TextField
+                        multiline={true}
+                        rows={1}
+                        required
+                        fullWidth
+                        name="password"
+                        label="Password"
+                        type="password"
+                        id="password"
+                        onChange={handleChange}
+                        autoComplete="new-password"
+                        value={formData.password}
+                      />
+                    </Grid>
+                    <Grid item xs={12}>
+                      <TextField
+                        multiline={true}
+                        rows={1}
+                        required
+                        fullWidth
+                        name="password2"
+                        label="Confirm Password"
+                        type="password"
+                        id="password2"
+                        onChange={handleChange}
+                        autoComplete="new-password"
+                        value={formData.password2}
+                      />
+                    </Grid>
+                  </Grid>
+                  <Button
+                    type="submit"
+                    fullWidth
+                    variant="contained"
+                    sx={{ mt: 3, mb: 2 }}
+                  >
+                    Sign Up
+                  </Button>
+                  <Grid container justifyContent="flex-end">
+                    <Grid item>
+                      <Link href="/login" variant="body2">
+                        Already have an account? Sign in
+                      </Link>
+                    </Grid>
+                  </Grid>
+                </Box>
+              </Box>
+            </Container>
+          </ThemeProvider>
+        </div>
+      </div>
     </div>
   );
 }
 
-export {Copyrightt,SignUp}
-
+export { Copyrightt, SignUp };
 
 // import React from 'react';
 
@@ -193,7 +204,7 @@ export {Copyrightt,SignUp}
 //       <div class="loader_bg">
 //          <div class="loader"><img src="assets/images/loading.gif" alt="#" /></div>
 //       </div>
-      
+
 //       <section class="banner_main">
 //          <div id="banner1" class="carousel slide" data-ride="carousel">
 //             <ol class="carousel-indicators">
@@ -219,20 +230,20 @@ export {Copyrightt,SignUp}
 //                                           </div>
 //                                           </div>
 //                                        <div class="col-md-12 ">
-//                                           <input class="contactus" placeholder="First Name" type="type" name="fname"/> 
+//                                           <input class="contactus" placeholder="First Name" type="type" name="fname"/>
 //                                        </div>
 //                                        <div class="col-md-12">
-//                                           <input class="contactus" placeholder="Last name" type="type" name="lname"/>                          
+//                                           <input class="contactus" placeholder="Last name" type="type" name="lname"/>
 //                                        </div>
 //                                        <div class="col-md-12">
-//                                           <input class="contactus" placeholder="Email" type="email" name="email"/> 
+//                                           <input class="contactus" placeholder="Email" type="email" name="email"/>
 //                                        </div>
 //                                        <div class="col-md-12">
-//                                           <input class="contactus" placeholder="Phone Number" type="type" name="Phone Number"/>                          
+//                                           <input class="contactus" placeholder="Phone Number" type="type" name="Phone Number"/>
 //                                        </div>
 //                                        <div class="col-md-12">
-//                                           <input class="contactus" placeholder="Password" type="password" name="Password"/>                          
-                                       
+//                                           <input class="contactus" placeholder="Password" type="password" name="Password"/>
+
 //                                        <div class="col-md-12">
 //                                           <button class="send_btn">Sign-Up</button>
 //                                        </div>
@@ -343,18 +354,14 @@ export {Copyrightt,SignUp}
 //             <i class="fa fa-chevron-right" aria-hidden="true"></i>
 //             </a>
 //          </div>
-//       </section>      
-      
+//       </section>
+
 //      </body>
 //      </div>
-     
+
 //     );
 //   }
 // export default Signup;
-
-
-
-
 
 // import React from 'react';
 
@@ -380,20 +387,20 @@ export {Copyrightt,SignUp}
 //                   <form id="request" class="main_form">
 //                      <div class="row">
 //                         <div class="col-md-12 ">
-//                            <input class="contactus" placeholder="First Name" type="type" name="fname"/> 
+//                            <input class="contactus" placeholder="First Name" type="type" name="fname"/>
 //                         </div>
 //                         <div class="col-md-12">
-//                            <input class="contactus" placeholder="Last name" type="type" name="lname"/>                          
+//                            <input class="contactus" placeholder="Last name" type="type" name="lname"/>
 //                         </div>
 //                         <div class="col-md-12">
-//                            <input class="contactus" placeholder="Email" type="email" name="email"/> 
+//                            <input class="contactus" placeholder="Email" type="email" name="email"/>
 //                         </div>
 //                         <div class="col-md-12">
-//                            <input class="contactus" placeholder="Phone Number" type="type" name="Phone Number"/>                          
+//                            <input class="contactus" placeholder="Phone Number" type="type" name="Phone Number"/>
 //                         </div>
 //                         <div class="col-md-12">
-//                            <input class="contactus" placeholder="Password" type="password" name="Password"/>                          
-                        
+//                            <input class="contactus" placeholder="Password" type="password" name="Password"/>
+
 //                         <div class="col-md-12">
 //                            <button class="send_btn">Sign-Up</button>
 //                         </div>

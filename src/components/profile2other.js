@@ -40,7 +40,7 @@ const rows = [
   createData('Gingerbread', 356, 16.0, 49, 3.9),
 ];
 
-export default function CustomizedTables() {
+export default function CustomizedTables({data}) {
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 700 }} aria-label="customized table">
@@ -54,17 +54,25 @@ export default function CustomizedTables() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
-            <StyledTableRow key={row.name}>
-              <StyledTableCell component="th" scope="row">
-                {row.name}
+        {data?.length > 0 ? (
+            data.map((row) => (
+              <StyledTableRow key={row?.user}>
+                <StyledTableCell component="th" scope="row">
+                  {row.user}
+                </StyledTableCell>
+                <StyledTableCell align="right">{row?.phone_no}</StyledTableCell>
+                <StyledTableCell align="right">{row?.charget_type}</StyledTableCell>
+                <StyledTableCell align="right">{row?.date}</StyledTableCell>
+                <StyledTableCell align="right">{row?.time}</StyledTableCell>
+              </StyledTableRow>
+            ))
+          ) : (
+            <StyledTableRow>
+              <StyledTableCell colSpan={5} component="th" scope="row">
+                {"No Data Found"}
               </StyledTableCell>
-              <StyledTableCell align="right">{row.calories}</StyledTableCell>
-              <StyledTableCell align="right">{row.fat}</StyledTableCell>
-              <StyledTableCell align="right">{row.carbs}</StyledTableCell>
-              <StyledTableCell align="right">{row.protein}</StyledTableCell>
             </StyledTableRow>
-          ))}
+          )}
         </TableBody>
       </Table>
     </TableContainer>

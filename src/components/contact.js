@@ -4,9 +4,9 @@ function Contact() {
     return (
       <div>
           <body class="main-layout inner_posituong contact_page">
-      <div class="loader_bg">
+      {/* <div class="loader_bg">
          <div class="loader"><img src="./assets/images/loading.gif" alt="#" /></div>
-      </div>
+      </div> */}
       
       <div class="contact">
          <div class="container">

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { apiGateway } from "../services/authorizationService";
 
 function Addstation2() {
@@ -16,16 +17,20 @@ function Addstation2() {
     charger_type: "",
   });
 
+  const navigate = useNavigate();
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault()
-    const { station_name, ...rest } = formData
+    e.preventDefault();
+    const { station_name, ...rest } = formData;
     const resData = apiGateway.post(`/stations/`, rest);
-    console.log(resData);
+    if (resData.status === 200 || resData.status === 201) {
+      alert("Station created successfully");
+      navigate("/home");
+    }
   };
 
   return (
@@ -42,11 +47,11 @@ function Addstation2() {
         crossorigin="anonymous"
       ></script>
       <body class="main-layout inner_posituong contact_page">
-        <div class="loader_bg">
+        {/* <div class="loader_bg">
           <div class="loader">
             <img src="./assets/images/loading.gif" alt="#" />
           </div>
-        </div>
+        </div> */}
         <div class="about">
           <div class="container">
             <h1 class="display-4">Add station details</h1>

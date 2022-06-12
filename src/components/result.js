@@ -3,52 +3,22 @@ import { Link } from "react-router-dom";
 import { apiGateway } from "../services/authorizationService";
 
 function Result() {
-  const [results, setResults] = useState([
-    // {
-    //   id: 1,
-    //   name: "Priya Electricals",
-    //   type: "CHAdeMo,CCS",
-    //   price: "16",
-    //   power: "25.0",
-    //   address: "cuddalore Pondiherry,SH49,Ariyankuppam,605007",
-    //   contact_number: "09486156156",
-    // },
-    // {
-    //   id: 2,
-    //   name: "Yogan Charge centre",
-    //   type: "Type2",
-    //   price: "20",
-    //   power: "60.0",
-    //   address:
-    //     "No.77, Gundu Salai, Near 100 Feet Road, Mariamman Nagar, Mudaliarpet, Puducherry, 605004",
-    //   contact_number: "09486156156",
-    // },
-    // {
-    //   id: 3,
-    //   name: "Test centre",
-    //   type: "Type2",
-    //   price: "20",
-    //   power: "60.0",
-    //   address:
-    //     "No.77, Gundu Salai, Near 100 Feet Road, Mariamman Nagar, Mudaliarpet, Puducherry, 605004",
-    //   contact_number: "09486156156",
-    // },
-  ]);
+  const [results, setResults] = useState([]);
 
-  useEffect(async() => {
-    let params = new URL(document.location).searchParams;
-    let location = params.get("location");
-    // location api end point
-    const res = await apiGateway.get(`/stations/`, { params: { location } });
-    console.log(res);
-    if (res.status ===200) {
-      console.log('200');
-      //settings backend data into the results state
-      setResults(res.data);
-    }
+  useEffect(() => {
+    getStations();
   }, []);
 
-  console.log(results);
+  const getStations = async () => {
+    let params = new URL(document.location).searchParams;
+    let location = params.get("location");
+    const res = await apiGateway.get(`/stations/`, { params: { location } });
+    if (res.status === 200) {
+      setResults(res.data);
+    }
+  };
+
+  const token = localStorage.getItem("token");
   return (
     <div>
       <div class="about">
@@ -95,44 +65,59 @@ function Result() {
   </div>
 </div> */}
 
-                {results.map((item) => (
-                  <>
-                    <br />
-                    <div class="card">
-                      <h3 class="card-header">
-                        <b>{item?.name}</b>
-                      </h3>
-                      <div class="card-body ">
-                        <h5 class="card-title">
-                          <b>CHARGER TYPE:</b>
-                          {item?.charger_type}
-                        </h5>
-                        <h5 class="text-left">
-                          <b>PRICE/HOUR :</b> ₹{item?.price}
-                        </h5>
-                        <h5 class="card-text">
-                          <b>POWER : </b>
-                          {item?.kilowatt}kW
-                        </h5>
-                        <h5 class="card-text">
-                          <b>ADDRESS: </b>
-                          {item?.address}
-                        </h5>
-                        <h5 class="card-text">
-                          <b>CONTACT NUM : </b>
-                          {item?.phone_num}
-                        </h5>
-                        <div class="text-right">
-                          <Link to={`/book?${item?.id}`} class="btn btn-primary">
-                            {" "}
-                            Book Slot
-                          </Link>
+                {results?.length ? (
+                  results.map((item) => (
+                    <>
+                      <br />
+                      <div class="card">
+                        <h3 class="card-header">
+                          <b>{item?.name}</b>
+                        </h3>
+                        <div class="card-body ">
+                          <h5 class="card-title">
+                            <b>CHARGER TYPE:</b>
+                            {item?.charger_type}
+                          </h5>
+                          <h5 class="text-left">
+                            <b>PRICE/HOUR :</b> ₹{item?.price}
+                          </h5>
+                          <h5 class="card-text">
+                            <b>POWER : </b>
+                            {item?.kilowatt}kW
+                          </h5>
+                          <h5 class="card-text">
+                            <b>ADDRESS: </b>
+                            {item?.address}
+                          </h5>
+                          <h5 class="card-text">
+                            <b>CONTACT NUM : </b>
+                            {item?.phone_no}
+                          </h5>
+                          <div class="text-right">
+                            <Link
+                              to={
+                                token
+                                  ? `/book?id=${item?.id}&price=${item?.price}&charger_type=${item?.charger_type}&phone_no=${item?.phone_no}`
+                                  : "/login"
+                              }
+                              class="btn btn-primary"
+                            >
+                              {" "}
+                              Book Slot
+                            </Link>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                    <br />
-                  </>
-                ))}
+                      <br />
+                    </>
+                  ))
+                ) : (
+                  <div class="card">
+                    <h3 class="card-header">
+                      <b>Sorry. No Stations Found</b>
+                    </h3>
+                  </div>
+                )}
               </div>
             </body>
           </div>

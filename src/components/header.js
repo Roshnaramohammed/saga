@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route, Redirect, Link, } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Redirect, Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
 // import Home from './home';
@@ -9,11 +9,11 @@ import { useNavigate } from "react-router-dom";
 // import Header from './components/header';
 // import Laptop from './laptop';
 // import Product from './product';
-const token = localStorage.getItem('token')
 function Header() {
    const navigate = useNavigate();
-
-  const handleLogout= ()=> {
+   
+   const token = localStorage.getItem('token')
+   const handleLogout= ()=> {
    localStorage.removeItem("token")
    navigate('/login')
    }
@@ -42,15 +42,15 @@ function Header() {
 
 
                                  <li class="nav-item ">
-                                    <a class="nav-link" href="home">Home</a>
+                                    <Link class="nav-link" to="/home">Home</Link>
                                  </li>
 
                                  <li class="nav-item">
-                                    <a class="nav-link" href="about">Aboutus</a>
+                                    <Link class="nav-link" to="/about">Aboutus</Link>
                                  </li>
 
                                  <li>
-                                    <a class="nav-link" href="contact">Contact Us</a>
+                                    <Link class="nav-link" to="/contact">Contact Us</Link>
                                  </li>
 
                                  <li class="nav-item d_none">
@@ -63,16 +63,16 @@ function Header() {
                                  {!token ? (
                                     <>
                                        <li class="nav-item d_none">
-                                          <button type="button" class="btn btn-secondary btn-sm" href="signup"><a class="nav-link" href="signup">Sign-Up</a></button>
+                                          <button type="button" class="btn btn-secondary btn-sm" href="signup"><Link class="nav-link" to="/signup">Sign-Up</Link></button>
                                        </li>
                                        {" "}
-                                       <li class="nav-item d_none">
-                                          <button type="button" class="btn btn-dark btn-sm" href="login"><a class="nav-link" href="login">Sign-In</a></button>
+                                       <li class="nav-item d_none ml-2">
+                                          <button type="button" class="btn btn-dark btn-sm" href="login"><Link class="nav-link" to="/login">Sign-In</Link></button>
                                        </li>
                                     </>
                                  ) : (
                                     <li class="nav-item d_none">
-                                       <button type="button" class="btn btn-secondary btn-sm" href="signup"><a class="nav-link" onClick={handleLogout} href="#">Logout</a></button>
+                                       <button onClick={handleLogout} type="button" class="btn btn-secondary btn-sm nav-link">Logout</button>
                                     </li>
                                  )}
 
