@@ -8,24 +8,25 @@ export const apiGateway = axios.create({
   withCredentials: true,
 });
 
-apiGateway.interceptors.response.use(
-  (res) => {
-    return res;
-  },
-  function (res) {
-    if (res.response && res.response.status === 401) {
-      localStorage.clear();
-      window.location.href = "/";
-    }
-    return res;
-  }
-);
+// apiGateway.interceptors.response.use(
+//   (res) => {
+//     return res;
+//   },
+//   function (res) {
+//     if (res.response && res.response.status === 401) {
+//       localStorage.clear();
+//       window.location.href = "/";
+//     }
+//     return res;
+//   }
+// );
 
 apiGateway.interceptors.request.use(function (config) {
-  const token = localStorage.getItem("fca-token");
+  const token = localStorage.getItem("token") || "";
   config.headers = {
     ...config.headers,
-    Authorization: `Bearer ${token}`,
+    // Authorization: `Bearer ${token}`,
+    Authorization: token ? `token ${token}` : "",
   };
   return config;
 });

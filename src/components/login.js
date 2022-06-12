@@ -13,7 +13,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { apiGateway } from "../services/authorizationService";
-
+import { useNavigate } from "react-router-dom";
 function Copyright(props) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
@@ -30,6 +30,8 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function SignIn() {
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -40,11 +42,16 @@ export default function SignIn() {
     setFormData({ ...formData, [name]: value });
   };
   
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     console.log(formData);
-    const resData = apiGateway.post(`/account/login/`, formData);
-    console.log(resData);
+    const resData = await apiGateway.post(`/account/login/`, formData);
+    console.log(resData.status);
+    if(resData.status ===200){
+      localStorage.setItem("token", resData?.data?.token)
+      navigate('/home')
+    }
+    // console.log(resData);
   }
 
   return (
@@ -88,6 +95,7 @@ export default function SignIn() {
               onChange={handleChange}
               autoComplete="email"
               autoFocus
+              value={formData.email}
             />
             <TextField
                 multiline={true}
@@ -101,6 +109,7 @@ export default function SignIn() {
               type="password"
               id="password"
               autoComplete="current-password"
+              value={formData.password}
             />
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
@@ -121,7 +130,7 @@ export default function SignIn() {
                 </Link>
               </Grid>
               <Grid item>
-                <Link href="#" variant="body2">
+                <Link href="/signup" variant="body2">
                   {"Don't have an account? Sign Up"}
                 </Link>
               </Grid>

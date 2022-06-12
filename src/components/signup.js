@@ -40,17 +40,20 @@ export default function SignUp() {
   })
 
   const handleChange = (e) => {
+    
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
+
 
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log(formData);
     const resData = apiGateway.post(`/account/register/`, formData);
-    console.log(resData.data);
+    console.log(resData);
     
   };
+  
 
   return (
     <div>
@@ -83,13 +86,14 @@ export default function SignUp() {
                 multiline={true}
                 rows={1}
                   autoComplete="given-name"
-                  name="firstName"
+                  name="first_name"
                   required
                   fullWidth
                   id="first_name"
                   label="First Name"
                   onChange={handleChange}
                   autoFocus
+                  value={formData.first_name}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -103,6 +107,7 @@ export default function SignUp() {
                   name="last_name"
                   onChange={handleChange}
                   autoComplete="family-name"
+                  value={formData.last_name}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -116,6 +121,7 @@ export default function SignUp() {
                   name="email"
                   onChange={handleChange}
                   autoComplete="email"
+                  value={formData.email}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -130,6 +136,7 @@ export default function SignUp() {
                   id="password"
                   onChange={handleChange}
                   autoComplete="new-password"
+                  value={formData.password}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -144,6 +151,7 @@ export default function SignUp() {
                   id="password2"
                   onChange={handleChange}
                   autoComplete="new-password"
+                  value={formData.password2}
                 />
               </Grid>
               
@@ -158,7 +166,7 @@ export default function SignUp() {
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link href="#" variant="body2">
+                <Link href="/login" variant="body2">
                   Already have an account? Sign in
                 </Link>
               </Grid>

@@ -1,47 +1,54 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { apiGateway } from "../services/authorizationService";
 
 function Result() {
   const [results, setResults] = useState([
-    {
-      name: "Priya Electricals",
-      type: "CHAdeMo,CCS",
-      price: "16",
-      power: "25.0",
-      address: "cuddalore Pondiherry,SH49,Ariyankuppam,605007",
-      contact_number: "09486156156",
-    },
-    {
-      name: "Yogan Charge centre",
-      type: "Type2",
-      price: "20",
-      power: "60.0",
-      address:
-        "No.77, Gundu Salai, Near 100 Feet Road, Mariamman Nagar, Mudaliarpet, Puducherry, 605004",
-      contact_number: "09486156156",
-    },
-    {
-      name: "Test centre",
-      type: "Type2",
-      price: "20",
-      power: "60.0",
-      address:
-        "No.77, Gundu Salai, Near 100 Feet Road, Mariamman Nagar, Mudaliarpet, Puducherry, 605004",
-      contact_number: "09486156156",
-    },
+    // {
+    //   id: 1,
+    //   name: "Priya Electricals",
+    //   type: "CHAdeMo,CCS",
+    //   price: "16",
+    //   power: "25.0",
+    //   address: "cuddalore Pondiherry,SH49,Ariyankuppam,605007",
+    //   contact_number: "09486156156",
+    // },
+    // {
+    //   id: 2,
+    //   name: "Yogan Charge centre",
+    //   type: "Type2",
+    //   price: "20",
+    //   power: "60.0",
+    //   address:
+    //     "No.77, Gundu Salai, Near 100 Feet Road, Mariamman Nagar, Mudaliarpet, Puducherry, 605004",
+    //   contact_number: "09486156156",
+    // },
+    // {
+    //   id: 3,
+    //   name: "Test centre",
+    //   type: "Type2",
+    //   price: "20",
+    //   power: "60.0",
+    //   address:
+    //     "No.77, Gundu Salai, Near 100 Feet Road, Mariamman Nagar, Mudaliarpet, Puducherry, 605004",
+    //   contact_number: "09486156156",
+    // },
   ]);
 
-  useEffect(() => {
+  useEffect(async() => {
     let params = new URL(document.location).searchParams;
     let location = params.get("location");
     // location api end point
-    const res = apiGateway.post(`/api/v1/location`, { location });
-    if (res.data) {
+    const res = await apiGateway.get(`/stations/`, { params: { location } });
+    console.log(res);
+    if (res.status ===200) {
+      console.log('200');
       //settings backend data into the results state
       setResults(res.data);
     }
   }, []);
 
+  console.log(results);
   return (
     <div>
       <div class="about">
@@ -49,11 +56,11 @@ function Result() {
           <div>
             <body class="main-layout inner_posituong computer_page">
               <div>
-                <div class="loader_bg">
+                {/* <div class="loader_bg">
                   <div class="loader">
                     <img src="./assets/images/loading.gif" alt="#" />
                   </div>
-                </div>
+                </div> */}
 
                 {/* <div class="card-deck">
   <div class="card">
@@ -93,33 +100,33 @@ function Result() {
                     <br />
                     <div class="card">
                       <h3 class="card-header">
-                        <b>{item.name}</b>
+                        <b>{item?.name}</b>
                       </h3>
                       <div class="card-body ">
                         <h5 class="card-title">
                           <b>CHARGER TYPE:</b>
-                          {item.type}
+                          {item?.charger_type}
                         </h5>
                         <h5 class="text-left">
-                          <b>PRICE/HOUR :</b> ₹{item.price}
+                          <b>PRICE/HOUR :</b> ₹{item?.price}
                         </h5>
                         <h5 class="card-text">
                           <b>POWER : </b>
-                          {item.power}kW
+                          {item?.kilowatt}kW
                         </h5>
                         <h5 class="card-text">
                           <b>ADDRESS: </b>
-                          {item.address}
+                          {item?.address}
                         </h5>
                         <h5 class="card-text">
                           <b>CONTACT NUM : </b>
-                          {item.contact_number}
+                          {item?.phone_num}
                         </h5>
                         <div class="text-right">
-                          <a href="#" class="btn btn-primary">
+                          <Link to={`/book?${item?.id}`} class="btn btn-primary">
                             {" "}
                             Book Slot
-                          </a>
+                          </Link>
                         </div>
                       </div>
                     </div>

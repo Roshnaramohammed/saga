@@ -7,10 +7,10 @@ function Addstation2() {
     station_name: "",
     location: "",
     address: "",
-    contact_number: "",
+    phone_no: "",
     supplier: "",
-    kw: "",
-    zip: "",
+    kilowatt: "",
+    zipcode: "",
     domestic: "",
     price: "",
     charger_type: "",
@@ -21,8 +21,10 @@ function Addstation2() {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = () => {
-    const resData = apiGateway.post(`/api/v1/submitform`, formData);
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    const { station_name, ...rest } = formData
+    const resData = apiGateway.post(`/stations/`, rest);
     console.log(resData);
   };
 
@@ -81,7 +83,7 @@ function Addstation2() {
                   Charging staion location
                 </label>
                 <input
-                  type="email"
+                  type="text"
                   name="location"
                   value={formData.location}
                   onChange={handleChange}
@@ -108,8 +110,8 @@ function Addstation2() {
                 </label>
                 <input
                   type="text"
-                  name="zip"
-                  value={formData.zip}
+                  name="zipcode"
+                  value={formData.zipcode}
                   onChange={handleChange}
                   class="form-control"
                   id="inputZip"
@@ -124,8 +126,8 @@ function Addstation2() {
                   class="form-control"
                   id="inputAddress"
                   placeholder="+91XXXXXXXXX"
-                  name="contact_number"
-                  value={formData.contact_number}
+                  name="phone_no"
+                  value={formData.phone_no}
                   onChange={handleChange}
                 />
               </div>
@@ -142,9 +144,9 @@ function Addstation2() {
                   onChange={handleChange}
                   class="form-select"
                 >
-                  <option selected>Choose...</option>
-                  <option>Domestic</option>
-                  <option>Non-Domestic</option>
+                  <option value="">Choose...</option>
+                  <option value={true}>Domestic</option>
+                  <option value={false}>Non-Domestic</option>
                 </select>
               </div>
               {/* <div class="col-md-4">
@@ -159,15 +161,15 @@ function Addstation2() {
                 &nbsp;&nbsp;
                 <select
                   id="inputState"
-                  name="kw"
-                  value={formData.kw}
+                  name="kilowatt"
+                  value={formData.kilowatt}
                   onChange={handleChange}
                   class="form-select"
                 >
-                  <option selected>Choose...</option>
-                  <option>3</option>
-                  <option>5</option>
-                  <option>7</option>
+                  <option value="">Choose...</option>
+                  <option value={3}>3</option>
+                  <option value={5}>5</option>
+                  <option value={7}>7</option>
                 </select>
               </div>
               {/* <div class="col-md-2">
@@ -200,12 +202,12 @@ function Addstation2() {
                   onChange={handleChange}
                   class="form-select"
                 >
-                  <option selected>Choose...</option>
-                  <option>AC Type 1</option>
-                  <option>AC Type 2</option>
-                  <option>DC CHAdeMO</option>
-                  <option>DC CCS</option>
-                  <option>DC Type 2</option>
+                  <option value="">Choose...</option>
+                  <option value={1}>AC Type 1</option>
+                  <option value={2}>AC Type 2</option>
+                  <option value={3}>DC CHAdeMO</option>
+                  <option value={4}>DC CCS</option>
+                  <option value={5}>DC Type 2</option>
                 </select>
               </div>
               <div class="col-12">

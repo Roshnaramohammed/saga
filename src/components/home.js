@@ -4,19 +4,19 @@ function Home() {
     return (
       <div>
           <body class="main-layout">
-      <div class="loader_bg">
+      {/* <div class="loader_bg">
          <div class="loader"><img src="assets/images/loading.gif" alt="#" /></div>
-      </div>
+      </div> */}
       
       <section class="banner_main">
          <div id="banner1" class="carousel slide" data-ride="carousel">
-            <ol class="carousel-indicators">
+            {/* <ol class="carousel-indicators">
                <li data-target="#banner1" data-slide-to="0" class="active"></li>
                <li data-target="#banner1" data-slide-to="1"></li>
                <li data-target="#banner1" data-slide-to="2"></li>
                <li data-target="#banner1" data-slide-to="3"></li>
                <li data-target="#banner1" data-slide-to="4"></li>
-            </ol>
+            </ol> */}
             <div class="carousel-inner">
                <div class="carousel-item active">
                   <div class="container">
@@ -25,7 +25,7 @@ function Home() {
                            <div class="col-md-6">
                               <div class="text-bg">
                                  <span>Electric Vehicle</span>
-                                 <h1>Charging Hub</h1>
+                                 <h1>Share Charge</h1>
                                  <p>The India's bookable home and destination EV charging network, Charge your electric vehicle a anywhere and at anytime </p>
                                  <a href="search">Find Station </a>
                                  <a href="addstation2">Add Station </a>
@@ -47,7 +47,7 @@ function Home() {
                            <div class="col-md-6">
                            <div class="text-bg">
                                  <span>Electric Vehicle</span>
-                                 <h1>Charging Hub</h1>
+                                 <h1>Share Charge</h1>
                                  <p>The Indias bookable home and destination EV charging network, Charge your electric vehicle a anywhere and at anytime </p>
                                  <a href="search">Find Station </a>
                                  <a href="addstation2">Add Station </a>
@@ -69,7 +69,7 @@ function Home() {
                            <div class="col-md-6">
                            <div class="text-bg">
                                  <span>Electric Vehicle</span>
-                                 <h1>Charging Hub</h1>
+                                 <h1>Share Charge</h1>
                                  <p>The Indias bookable home and destination EV charging network, Charge your electric vehicle a anywhere and at anytime </p>
                                  <a href="search">Find Station </a>
                                  <a href="addstation2">Add Station </a>
@@ -91,7 +91,7 @@ function Home() {
                            <div class="col-md-6">
                            <div class="text-bg">
                                  <span>Electric Vehicle</span>
-                                 <h1>Charging Hub</h1>
+                                 <h1>Share Charge</h1>
                                  <p>The Indias bookable home and destination EV charging network, Charge your electric vehicle a anywhere and at anytime </p>
                                  <a href="search">Find Station </a>
                                  <a href="addstation2">Add Station </a>
@@ -113,7 +113,7 @@ function Home() {
                            <div class="col-md-6">
                            <div class="text-bg">
                                  <span>Electric Vehicle</span>
-                                 <h1>Charging Hub</h1>
+                                 <h1>Share Charge</h1>
                                  <p>The Indias bookable home and destination EV charging network, Charge your electric vehicle a anywhere and at anytime </p>
                                  <a href="search">Find Station </a> <a href="contact.html">Add Station </a>
                               </div>
@@ -157,12 +157,12 @@ function Home() {
                </div>
                <div class="col-md-4">
                   <div class="box_text">
-                     <i><img src="assets/images/efc.png" alt="#"/></i>
-                     <h3>Efficient </h3>
+                     <i><img src="assets/images/efc.png" alt="#"/></i><br/>
+                     <h3>Efficient </h3> 
                      <p>Efficiency of the vehicle will be increased, because it will be able to recharge and use properly </p>
                   </div>
                </div>
-            </div>
+            </div><br/>
          </div>
       </div>
       

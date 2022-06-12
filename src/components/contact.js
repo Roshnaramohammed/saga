@@ -7,12 +7,12 @@ function Contact() {
       <div class="loader_bg">
          <div class="loader"><img src="./assets/images/loading.gif" alt="#" /></div>
       </div>
-
+      
       <div class="contact">
          <div class="container">
             <div class="row">
                <div class="col-md-12">
-                  <div class="titlepage">
+                  <div class="titlepage"> <br/><br/><br/>
                      <h2>Contact Now</h2>
                   </div>
                </div>

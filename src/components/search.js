@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import {Link} from "react-router-dom"
 function Search() {
   const [location, setLocation] = useState("");
 
@@ -37,8 +37,8 @@ function Search() {
                     </div>
 
                     <div class="col-md-12">
-                      <button class="send_btn">
-                        <a href={`res?location=${location}`}>Search </a>
+                      <button class="send_btn" onClick={(e)=> e.preventDefault()}>
+                        <Link to={`/res?location=${location}`}>Search </Link>
                       </button>
                     </div>
                   </div>

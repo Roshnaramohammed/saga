@@ -12,6 +12,7 @@ import Addstation2 from './components/addstation2';
 import Footer from './components/footer';
 import Book from './components/book';
 import { Route, BrowserRouter as Router, Routes,Link } from 'react-router-dom';
+import Profile2 from './components/profile2';
 
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
           <Route exact path="/addstation2" element={<Addstation2 />} />
           <Route exact path="/res" element={<Result/>} />
           <Route exact path="/book" element={<Book />} />
+          <Route exact path="/profile" element={<Profile2 />} />
           
           
 

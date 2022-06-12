@@ -20,7 +20,7 @@ function Aboutus() {
                   <div class="titlepage">
                      <h2>About Us</h2>
                      <p>The Electric Vehicles (EV) like their fossil fuel siblings need to refuel. The fuel for them is electricity.Share charge serves charging needs of EV users. we provides a hassle free and reliable charging services for all types of Electrical Vehicles (EVs).a safety net for when commercial charging lets you down. A way for local neighbourhoods to collaborate to help EV drivers without off-road parking. An opportunity for private and business chargepoint owners to make some extra money</p>
-                     <a class="read_more" href="#">Read More</a>
+                     <a class="read_more" href="home">Read more</a>
                   </div>
                </div>
                <div class="col-md-7">
@@ -59,7 +59,7 @@ function Aboutus() {
             </div>
          </div>
       </div> */}
-      <div class="row">
+      {/* <div class="row">
                <div class="col-md-12">
                   <div class="titlepage">
                      <h2>Meet Our Team</h2>
@@ -91,7 +91,7 @@ function Aboutus() {
                         
                         {/* <div class="col-md-12">
                            <a class="read_more" href="#">See More</a>
-                        </div> */}
+                        </div> 
                      </div>
                   </div>
                </div>
@@ -100,7 +100,8 @@ function Aboutus() {
       </div>
 
       </body>
-      </div>
+      </div> */}
+      </div></body></div>
       
     );
   }
