@@ -205,7 +205,7 @@ export default function Book() {
               <div className="col-lg-2">
                 {" "}
                 <a href="#" onClick={handleSubmit} class="btn btn-primary mb-2">
-                  Proceed to pay
+                  BOOK NOW
                 </a>
               </div>
             </div>
