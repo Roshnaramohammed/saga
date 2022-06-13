@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route, Redirect, Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 // import Home from './home';
 // import Contact from './contact';
@@ -71,9 +72,18 @@ function Header() {
                                        </li>
                                     </>
                                  ) : (
+                                    <> 
+                                    
                                     <li class="nav-item d_none">
-                                       <button onClick={handleLogout} type="button" class="btn btn-secondary btn-sm nav-link">Logout</button>
+                                       
+                                       <button onClick={handleLogout} type="button" class="btn btn-secondary btn-sm nav-link">Logout</button><br/>
+                                    </li><br/><br/>
+                                    <li class="nav-item d_none">
+                                    <Link class="nav-link" to="/profile"> <AccountCircleIcon 
+                                    color="action"
+                                    sx={{ fontSize: 30 }}/></Link>
                                     </li>
+                                    </>
                                  )}
 
 
