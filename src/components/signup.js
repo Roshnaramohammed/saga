@@ -176,7 +176,7 @@ export default function SignUp() {
                     </Grid>
                     <Grid item xs={12}>
                       <TextField
-                        multiline={true}
+                        // multiline={true}
                         rows={1}
                         required
                         fullWidth
@@ -191,7 +191,7 @@ export default function SignUp() {
                     </Grid>
                     <Grid item xs={12}>
                       <TextField
-                        multiline={true}
+                        // multiline={true}
                         rows={1}
                         required
                         fullWidth
