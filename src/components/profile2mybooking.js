@@ -56,9 +56,9 @@ export default function CustomizedTables({ data }) {
         <TableBody>
           {data?.length > 0 ? (
             data.map((row) => (
-              <StyledTableRow key={row?.name}>
+              <StyledTableRow key={row?.user}>
                 <StyledTableCell component="th" scope="row">
-                  {row.name}
+                  {row.user}
                 </StyledTableCell>
                 <StyledTableCell align="right">{row?.location}</StyledTableCell>
                 <StyledTableCell align="right">{row?.phone_no}</StyledTableCell>

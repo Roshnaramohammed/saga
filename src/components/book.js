@@ -52,7 +52,7 @@ export default function Book() {
   const [chargerTypes, setChargerTypes] = React.useState([]);
   const [vehicles, setVehicles] = React.useState([]);
   const [booking, setBooking] = React.useState({
-    id: `${Math.floor(Math.random() * 1000000000)}`,
+    // id: `${Math.floor(Math.random() * 1000000000)}`,
     date: null,
     time: null,
     duration: 60,
