@@ -11,7 +11,7 @@ function Profile2() {
 
   const getBookingDetails = async () => {
     try {
-      const res = await apiGateway.get(`/bookings/`);
+      const res = await apiGateway.get(`/mybookings/`);
       if (res.status === 200) {
         setMyBookings(res.data);
       }
@@ -22,7 +22,7 @@ function Profile2() {
 
   const getOtherBookingDetails = async () => {
     try {
-      const res = await apiGateway.get(`/stations/`);
+      const res = await apiGateway.get(`/bookings/`);
       if (res.status === 200) {
         setOtherBookings(res.data);
       }

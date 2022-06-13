@@ -61,7 +61,7 @@ export default function CustomizedTables({data}) {
                   {row.user}
                 </StyledTableCell>
                 <StyledTableCell align="right">{row?.phone_no}</StyledTableCell>
-                <StyledTableCell align="right">{row?.charget_type}</StyledTableCell>
+                <StyledTableCell align="right">{row?.charger_type}</StyledTableCell>
                 <StyledTableCell align="right">{row?.date}</StyledTableCell>
                 <StyledTableCell align="right">{row?.time}</StyledTableCell>
               </StyledTableRow>
