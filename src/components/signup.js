@@ -45,24 +45,61 @@ export default function SignUp() {
     first_name: "",
     last_name: "",
   });
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (event) => {
-    try {
-      event.preventDefault();
-      const resData = apiGateway.post(`/account/register/`, formData);
-      if (resData.status === 200 || resData.status === 201) {
-        navigate("/login");
-      }
-    } catch (error) {
-      console.log(error);
+  const validate = () => {
+    const { first_name, last_name, password, password2, email } = formData;
+    if (!email) {
+      setErrorMessage("Please provide a valid email address");
+      return false;
+    } else if (!first_name) {
+      setErrorMessage("First name is required");
+      return false;
+    } else if (!last_name) {
+      setErrorMessage("Last name is required");
+      return false;
+    } else if (!password) {
+      setErrorMessage("Password is required");
+      return false;
+    } else if (!password2) {
+      setErrorMessage("Confirm Password is required");
+      return false;
+    } else if (password !== password2) {
+      setErrorMessage("Password missmatch");
+      return false;
     }
+    return true;
   };
 
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    if (validate()) {
+      try {
+        const resData = await apiGateway.post(`/account/register/`, formData);
+        if (resData.status === 200 || resData.status === 201) {
+          setErrorMessage("");
+          navigate("/login");
+        } else if (resData.status === 400) {
+          setErrorMessage(
+            resData.data.email[0] ||
+              resData?.data?.password ||
+              "User Already Exist"
+          );
+        }
+      } catch (error) {
+        setErrorMessage(
+          error.response?.data.email[0] ||
+            error.response?.data?.password ||
+            "User Already Exist"
+        );
+      }
+    }
+  };
   return (
     <div>
       {/* <div class="loader_bg">
@@ -168,6 +205,9 @@ export default function SignUp() {
                       />
                     </Grid>
                   </Grid>
+                  <Typography color="red" variant="h6">
+                    {errorMessage}
+                  </Typography>
                   <Button
                     type="submit"
                     fullWidth

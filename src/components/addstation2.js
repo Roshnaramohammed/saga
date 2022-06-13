@@ -23,10 +23,10 @@ function Addstation2() {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
     const { station_name, ...rest } = formData;
-    const resData = apiGateway.post(`/stations/`, rest);
+    const resData = await apiGateway.post(`/stations/`, rest);
     if (resData.status === 200 || resData.status === 201) {
       alert("Station created successfully");
       navigate("/home");

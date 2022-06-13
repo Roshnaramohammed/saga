@@ -1086,3 +1086,12 @@ ul.social_icon li a:hover {
 
 /** end laptop **/
 
+.css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input {
+     height: 3rem;
+}
+label[data-shrink=false]+.MuiInputBase-formControl .css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input {
+     height: 3rem;
+}
+.css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input:focus {
+     height: 3rem;
+}

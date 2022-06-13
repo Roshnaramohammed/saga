@@ -136,10 +136,10 @@ export default function SignIn() {
                     value={formData.email}
                   />
                   <TextField
-                    multiline={true}
+                    // multiline={true}
                     rows={1}
                     margin="normal"
-                    required
+                    // required
                     fullWidth
                     onChange={handleChange}
                     name="password"
