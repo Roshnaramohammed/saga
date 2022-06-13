@@ -97,7 +97,7 @@ function Result() {
                             <Link
                               to={
                                 token
-                                  ? `/book?id=${item?.id}&price=${item?.price}&charger_type=${item?.charger_type}&phone_no=${item?.phone_no}`
+                                  ? `/book?id=${item?.id}&user=${item?.name}&price=${item?.price}&charger_type=${item?.charger_type}&phone_no=${item?.phone_no}`
                                   : "/login"
                               }
                               class="btn btn-primary"

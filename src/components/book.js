@@ -18,8 +18,8 @@ export default function Book() {
   const navigate = useNavigate();
 
   React.useEffect(() => {
-    // getStationData();
     getAllChargerTypes();
+    getAllVehicles();
   }, []);
 
   const params = new URL(document.location).searchParams;
@@ -38,30 +38,42 @@ export default function Book() {
       console.log({ error });
     }
   };
+  const getAllVehicles = async () => {
+    try {
+      const res = await apiGateway.get(`/vehicles/`);
+      if (res.status === 200) {
+        setVehicles(res.data);
+      }
+    } catch (error) {
+      console.log({ error });
+    }
+  };
 
   const [chargerTypes, setChargerTypes] = React.useState([]);
+  const [vehicles, setVehicles] = React.useState([]);
   const [booking, setBooking] = React.useState({
+    id: `${Math.floor(Math.random() * 1000000000)}`,
     date: null,
     time: null,
     duration: 60,
     price: params.get("price"),
-    status: "",
     station: params.get("id"),
-    user: null,
+    user: params.get("id"),
     vehicle: null,
     charger_type: "",
-    phone_num: "",
+    phone_no: "",
   });
   const handleChange = (e) => {
     const { name, value } = e.target;
     setBooking({ ...booking, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     try {
       e.preventDefault();
-      const resData = apiGateway.post(`/bookings/`, booking);
+      const resData = await apiGateway.post(`/bookings/`, booking);
       if (resData.status === 200 || resData.status === 201) {
+        alert("Booking created successfully")
         navigate("/profile");
       }
     } catch (error) {
@@ -104,16 +116,35 @@ export default function Book() {
               <FormControl component="fieldset">
                 <h4> Select your vehicle :</h4>
                 <FormGroup aria-label="position" row>
-                  <FormControlLabel
-                    value="4"
-                    control={<Checkbox />}
-                    labelPlacement="start"
-                    onChange={(e) => setBooking({ ...booking, vehicle: "4" })}
-                    checked={booking.vehicle === "4"}
-                  />
-                  <Checkbox icon={<ElectricCarIcon />} />
+                  {vehicles?.map((item) => (
+                    <>
+                      <FormControlLabel
+                        key={item?.id}
+                        value={item?.id}
+                        control={<Checkbox />}
+                        labelPlacement="start"
+                        onChange={(e) =>
+                          setBooking({ ...booking, vehicle: item?.id })
+                        }
+                        checked={booking.vehicle === item?.id}
+                      />
+                      <Checkbox
+                        icon={
+                          item?.name === "2 wheel" ? (
+                            <ElectricMopedIcon />
+                          ) : item?.name === "3 wheel" ? (
+                            <ElectricRickshawIcon />
+                          ) : item?.name === "4 wheel" ? (
+                            <ElectricCarIcon />
+                          ) : (
+                            <ElectricCarIcon />
+                          )
+                        }
+                      />
+                    </>
+                  ))}
 
-                  <FormControlLabel
+                  {/* <FormControlLabel
                     value="2"
                     control={<Checkbox />}
                     labelPlacement="start"
@@ -129,7 +160,7 @@ export default function Book() {
                     onChange={(e) => setBooking({ ...booking, vehicle: "3" })}
                     checked={booking.vehicle === "3"}
                   />
-                  <Checkbox icon={<ElectricRickshawIcon />} />
+                  <Checkbox icon={<ElectricRickshawIcon />} /> */}
                 </FormGroup>
               </FormControl>
               <h4>Select charge type : </h4>
@@ -155,8 +186,8 @@ export default function Book() {
                   class="form-control"
                   id="inputAddress"
                   placeholder="+91XXXXXXXXX"
-                  name="phone_num"
-                  value={booking.phone_num}
+                  name="phone_no"
+                  value={booking.phone_no}
                   onChange={handleChange}
                 />{" "}
               </div>
