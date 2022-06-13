@@ -3,6 +3,9 @@ import { useNavigate } from "react-router-dom";
 import { apiGateway } from "../services/authorizationService";
 
 function Addstation2() {
+  React.useEffect(() => {
+    getAllChargerTypes();
+  }, []);
   const [formData, setFormData] = useState({
     name: "",
     station_name: "",
@@ -16,6 +19,18 @@ function Addstation2() {
     price: "",
     charger_type: "",
   });
+  const [chargerTypes, setChargerTypes] = React.useState([]);
+
+  const getAllChargerTypes = async () => {
+    try {
+      const res = await apiGateway.get(`/charger_types/`);
+      if (res.status === 200) {
+        setChargerTypes(res.data);
+      }
+    } catch (error) {
+      console.log({ error });
+    }
+  };
 
   const navigate = useNavigate();
   const handleChange = (e) => {
@@ -23,7 +38,7 @@ function Addstation2() {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = async(e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const { station_name, ...rest } = formData;
     const resData = await apiGateway.post(`/stations/`, rest);
@@ -208,11 +223,11 @@ function Addstation2() {
                   class="form-select"
                 >
                   <option value="">Choose...</option>
-                  <option value={1}>AC Type 1</option>
-                  <option value={2}>AC Type 2</option>
-                  <option value={3}>DC CHAdeMO</option>
-                  <option value={4}>DC CCS</option>
-                  <option value={5}>DC Type 2</option>
+                  {chargerTypes?.map((item) => (
+                    <option key={item?.id} value={item?.id}>
+                      {item?.type}
+                    </option>
+                  ))}
                 </select>
               </div>
               <div class="col-12">
